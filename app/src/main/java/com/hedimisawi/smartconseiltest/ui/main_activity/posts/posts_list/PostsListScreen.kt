@@ -1,6 +1,5 @@
 package com.hedimisawi.smartconseiltest.ui.main_activity.posts.posts_list
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +23,7 @@ import androidx.navigation.NavController
 import com.hedimisawi.smartconseiltest.ui.main_activity.MainUIEvent
 import com.hedimisawi.smartconseiltest.ui.main_activity.posts.PostsViewModel
 import com.hedimisawi.smartconseiltest.ui.main_activity.posts.navigation.PostsScreens
+import com.hedimisawi.smartconseiltest.ui.shared_components.ErrorPlaceholder
 import kotlinx.coroutines.launch
 
 @Composable
@@ -51,7 +51,9 @@ fun PostsListScreen(
     }
 
     LaunchedEffect(Unit) {
-        viewModel.loadData()
+        if (viewModel.posts.isEmpty()) {
+            viewModel.loadData()
+        }
     }
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -65,28 +67,39 @@ fun PostsListScreen(
                 value = viewModel.searchQuery,
                 onValueChange = { viewModel.searchQuery = it })
         }
-        Box(modifier = Modifier.weight(1f).fillMaxWidth()) {
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        Box(modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth()) {
+            if (viewModel.isError) {
+                ErrorPlaceholder(modifier = Modifier.padding(16.dp))
             } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp),
-                ) {
-                    itemsIndexed(items = if(viewModel.searchQuery.trim() == "") viewModel.posts else viewModel.posts.filter {
-                        it.title.contains(viewModel.searchQuery.trim()) or it.body.contains(viewModel.searchQuery.trim())
-                    }) { _, post ->
-                        PostItem(modifier = Modifier.padding(vertical = 8.dp),
-                            post = post,
-                            onClick = {
-                                viewModel.selectedPost = post
-                                navController.navigate(PostsScreens.PostDetailsScreen.route)
-                            })
+                if (isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                } else {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 16.dp),
+                    ) {
+                        itemsIndexed(items = if (viewModel.searchQuery.trim() == "") viewModel.posts else viewModel.posts.filter {
+                            it.title.contains(viewModel.searchQuery.trim()) or it.body.contains(
+                                viewModel.searchQuery.trim()
+                            )
+                        }) { _, post ->
+                            PostItem(modifier = Modifier.padding(vertical = 8.dp),
+                                post = post,
+                                onClick = {
+                                    viewModel.selectedPost = post
+                                    navController.navigate(PostsScreens.PostDetailsScreen.route)
+                                })
+                        }
                     }
                 }
             }
+
         }
 
     }
 }
+
+

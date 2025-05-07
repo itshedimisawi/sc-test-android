@@ -27,9 +27,12 @@ class PostsViewModel @Inject constructor(
     var selectedPost by mutableStateOf<PostWithUser?>(null)
     var searchQuery by mutableStateOf("")
 
-
     private val _eventFlow = MutableSharedFlow<MainUIEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
+
+
+    var isError by mutableStateOf(false)
+
 
     fun loadData() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -48,6 +51,7 @@ class PostsViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
+                        isError = true
                         _eventFlow.emit(MainUIEvent.ShowSnackbar(S.ERROR_LOADING_DATA))
                     }
                 }

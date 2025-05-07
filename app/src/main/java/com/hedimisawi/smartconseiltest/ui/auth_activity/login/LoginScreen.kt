@@ -22,6 +22,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -29,11 +30,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.hedimisawi.smartconseiltest.R
 import com.hedimisawi.smartconseiltest.ui.auth_activity.AuthUIEvent
 import com.hedimisawi.smartconseiltest.ui.auth_activity.Header
 import com.hedimisawi.smartconseiltest.ui.auth_activity.navigation.Screens
 import com.hedimisawi.smartconseiltest.ui.shared_components.BlueFilledButton
 import com.hedimisawi.smartconseiltest.ui.shared_components.BlueOutlinedButton
+import com.hedimisawi.smartconseiltest.ui.shared_components.LoadingDialog
 import kotlinx.coroutines.launch
 
 @Composable
@@ -65,6 +68,7 @@ fun LoginScreen(
         }
     }
     Box(modifier = modifier.fillMaxSize()) {
+        LoadingDialog(state is AuthUIEvent.Loading)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -81,17 +85,17 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
 
-                Text("Email", fontSize = 16.sp)
+                Text(stringResource(R.string.email), fontSize = 16.sp)
                 OutlinedTextField(value = viewModel.email,
                     onValueChange = { viewModel.email = it },
-                    placeholder = { Text("Email") },
+                    placeholder = { Text(stringResource(R.string.email)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
                 if (viewModel.isEmailInvalid) {
                     Text(
-                        "Enter a valid email",
+                        stringResource(R.string.enter_a_valid_email),
                         color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp
                     )
@@ -101,10 +105,10 @@ fun LoginScreen(
             Column(
                 modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text("Password", fontSize = 16.sp)
+                Text(stringResource(R.string.password), fontSize = 16.sp)
                 OutlinedTextField(value = viewModel.password,
                     onValueChange = { viewModel.password = it },
-                    placeholder = { Text("Password") },
+                    placeholder = { Text(stringResource(R.string.password)) },
                     visualTransformation = if (viewModel.isPasswordVisible) {
                         VisualTransformation.None
                     } else PasswordVisualTransformation(),
@@ -117,12 +121,12 @@ fun LoginScreen(
                 )
                 if (viewModel.isPasswordTooShort) {
                     Text(
-                        "Password is too short",
+                        stringResource(R.string.password_is_too_short),
                         color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp
                     )
                 }
-                Text("Forgot Password",
+                Text(stringResource(R.string.forgot_password),
                     fontSize = 12.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.primary,
@@ -132,13 +136,13 @@ fun LoginScreen(
                         .padding(4.dp))
             }
             BlueFilledButton(
-                text = "Login",
+                text = stringResource(R.string.login),
                 onClick = { viewModel.loginUser(viewModel.email, viewModel.password) },
                 modifier = Modifier.padding(top = 16.dp)
             )
 
             BlueOutlinedButton(
-                text = "Sign Up",
+                text = stringResource(R.string.sign_up),
                 onClick = { navController.navigate(Screens.RegisterScreen.route) },
                 modifier = Modifier.padding(top = 8.dp)
             )

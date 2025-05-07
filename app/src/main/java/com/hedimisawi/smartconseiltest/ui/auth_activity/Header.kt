@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,9 +34,9 @@ fun Header(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxWidth(0.6f)
         )
         Spacer(modifier = Modifier.padding(top = 8.dp))
-        Text(text = "Welcome to NextData", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+        Text(text = stringResource(R.string.welcome_to_nextdata), fontSize = 22.sp, fontWeight = FontWeight.Bold)
         Text(
-            text = "Login with email",
+            text = stringResource(R.string.login_with_email),
             fontSize = 14.sp,
             color = MaterialTheme.colorScheme.onBackground.copy(0.6f)
         )

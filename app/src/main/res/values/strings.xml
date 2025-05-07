@@ -18,4 +18,24 @@
     <string name="error_user_not_found">User not found. Please check the email address.</string>
     <string name="error_wrong_password">The password you entered is incorrect.</string>
     <string name="error_loading_data">Error loading data</string>
+    <string name="error_logging_out">Error logging out</string>
+    <string name="login_with_email">Login with email</string>
+    <string name="welcome_to_nextdata">Welcome to NextData</string>
+    <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="enter_a_valid_email">Enter a valid email</string>
+    <string name="email">Email</string>
+    <string name="name_is_required">Name is required</string>
+    <string name="name">Name</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="password_is_too_short">Password is too short</string>
+    <string name="logged_in_as">Logged in as %1$s</string>
+    <string name="unknown">Unknown</string>
+    <string name="logout">Logout</string>
+    <string name="detail">Detail</string>
+    <string name="post_id">POST ID: %1$s</string>
+    <string name="server_error_code_5xx">Server Error Code 5XX</string>
 </resources>

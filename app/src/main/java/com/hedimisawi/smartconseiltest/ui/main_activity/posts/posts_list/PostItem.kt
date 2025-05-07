@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -70,7 +71,7 @@ fun PostItem(modifier: Modifier = Modifier, post: PostWithUser, onClick: () -> U
                 tint = MaterialTheme.colorScheme.onBackground.copy(0.6f)
             )
             Text(
-                "POST ID: ${post.postId}",
+                stringResource(R.string.post_id, post.postId),
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground.copy(0.6f)
             )
@@ -82,7 +83,7 @@ fun PostItem(modifier: Modifier = Modifier, post: PostWithUser, onClick: () -> U
                 containerColor = mutedButtonColor, contentColor = MaterialTheme.colorScheme.primary
             )
         ) {
-            Text(text = "Detail")
+            Text(text = stringResource(R.string.detail))
         }
     }
 }

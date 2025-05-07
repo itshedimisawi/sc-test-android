@@ -14,5 +14,6 @@ enum class S(@StringRes val resId: Int) {
     ERROR_WEAK_PASSWORD(R.string.error_weak_password),
     ERROR_USER_NOT_FOUND(R.string.error_user_not_found),
     ERROR_WRONG_PASSWORD(R.string.error_wrong_password),
-    ERROR_LOADING_DATA(R.string.error_loading_data)
+    ERROR_LOADING_DATA(R.string.error_loading_data),
+    ERROR_LOGGING_OUT(R.string.error_logging_out)
 }

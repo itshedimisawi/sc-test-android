@@ -27,15 +27,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.hedimisawi.smartconseiltest.R
 import com.hedimisawi.smartconseiltest.ui.auth_activity.AuthUIEvent
 import com.hedimisawi.smartconseiltest.ui.auth_activity.Header
 import com.hedimisawi.smartconseiltest.ui.shared_components.BlueFilledButton
+import com.hedimisawi.smartconseiltest.ui.shared_components.LoadingDialog
 import kotlinx.coroutines.launch
 
 
@@ -70,6 +74,7 @@ fun RegisterScreen(
     }
 
     Box(modifier = modifier.fillMaxSize()) {
+        LoadingDialog(state is AuthUIEvent.Loading)
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -86,16 +91,16 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text("Name", fontSize = 16.sp)
+                Text(stringResource(R.string.name), fontSize = 16.sp)
                 OutlinedTextField(value = viewModel.name,
                     onValueChange = { viewModel.name = it },
-                    placeholder = { Text("Name") },
+                    placeholder = { Text(stringResource(R.string.name)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true
                 )
                 if (viewModel.isNameEmpty) {
                     Text(
-                        "Name is required",
+                        stringResource(R.string.name_is_required),
                         color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp
                     )
@@ -106,17 +111,17 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text("Email", fontSize = 16.sp)
+                Text(stringResource(R.string.email), fontSize = 16.sp)
                 OutlinedTextField(value = viewModel.email,
                     onValueChange = { viewModel.email = it },
-                    placeholder = { Text("Email") },
+                    placeholder = { Text(stringResource(R.string.email)) },
                     modifier = Modifier.fillMaxWidth(),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
                 )
                 if (viewModel.isEmailInvalid) {
                     Text(
-                        "Enter a valid email",
+                        stringResource(R.string.enter_a_valid_email),
                         color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp
                     )
@@ -127,10 +132,10 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text("Password", fontSize = 16.sp)
+                Text(stringResource(R.string.password), fontSize = 16.sp)
                 OutlinedTextField(value = viewModel.password,
                     onValueChange = { viewModel.password = it },
-                    placeholder = { Text("Password") },
+                    placeholder = { Text(stringResource(R.string.password)) },
                     visualTransformation = if (viewModel.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
@@ -138,7 +143,7 @@ fun RegisterScreen(
                             viewModel.isPasswordVisible = !viewModel.isPasswordVisible
                         }) {
                             Icon(
-                                imageVector = if (viewModel.isPasswordVisible) Icons.Default.Email else Icons.Default.Share,
+                                painter = if (viewModel.isPasswordVisible) painterResource(id = R.drawable.visibility_on) else painterResource(id = R.drawable.visibility_off),
                                 contentDescription = null
                             )
                         }
@@ -159,11 +164,11 @@ fun RegisterScreen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Text("Confirm Password", fontSize = 16.sp)
+                Text(stringResource(R.string.confirm_password), fontSize = 16.sp)
                 OutlinedTextField(
                     value = viewModel.confirmPassword,
                     onValueChange = { viewModel.confirmPassword = it },
-                    placeholder = { Text("Confirm Password") },
+                    placeholder = { Text(stringResource(R.string.confirm_password)) },
                     visualTransformation = if (viewModel.isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = {
@@ -171,7 +176,7 @@ fun RegisterScreen(
                             viewModel.isPasswordVisible = !viewModel.isPasswordVisible
                         }) {
                             Icon(
-                                imageVector = if (viewModel.isPasswordVisible) Icons.Default.Email else Icons.Default.Email,
+                                painter = if (viewModel.isPasswordVisible) painterResource(id = R.drawable.visibility_on) else painterResource(id = R.drawable.visibility_off) ,
                                 contentDescription = null
                             )
                         }
@@ -181,7 +186,7 @@ fun RegisterScreen(
                 )
                 if (viewModel.isPasswordNotMatching) {
                     Text(
-                        "Passwords do not match",
+                        stringResource(R.string.passwords_do_not_match),
                         color = MaterialTheme.colorScheme.error,
                         fontSize = 12.sp
                     )
@@ -189,13 +194,13 @@ fun RegisterScreen(
             }
 
             BlueFilledButton(
-                text = "Sign Up",
+                text = stringResource(R.string.sign_up),
                 onClick = { viewModel.registerUser() },
                 modifier = Modifier.padding(top = 16.dp)
             )
 
             TextButton(onClick = { navController.navigateUp() }) {
-                Text("Already have an account")
+                Text(stringResource(R.string.already_have_an_account))
             }
         }
     }

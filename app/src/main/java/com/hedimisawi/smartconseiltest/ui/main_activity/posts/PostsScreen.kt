@@ -1,8 +1,10 @@
 package com.hedimisawi.smartconseiltest.ui.main_activity.posts
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -10,7 +12,9 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.rememberNavController
+import com.hedimisawi.smartconseiltest.R
 import com.hedimisawi.smartconseiltest.ui.main_activity.posts.navigation.PostsNavigation
 import com.hedimisawi.smartconseiltest.ui.theme.backgroundBlue
 
@@ -27,7 +31,11 @@ fun PostsScreen(modifier: Modifier = Modifier, viewModel: PostsViewModel) {
                 .background(backgroundBlue)
                 .padding(innerPadding)
         ) {
-            PostsNavigation(navController = navController, viewModel = viewModel, snackbarHostState = snackbarHostState)
+            PostsNavigation(
+                navController = navController,
+                viewModel = viewModel,
+                snackbarHostState = snackbarHostState
+            )
         }
     }
 }
