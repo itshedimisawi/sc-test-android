@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "847475152072",
+    "project_id": "hedismartconseil-7ed6f",
+    "storage_bucket": "hedismartconseil-7ed6f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847475152072:android:45927678ef50f578dd81fd",
+        "android_client_info": {
+          "package_name": "com.hedimisawi.smartconseiltest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD40YdNwHpBdhvCxeLze8TljthYA_EmsFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
